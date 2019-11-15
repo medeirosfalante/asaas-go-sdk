@@ -72,3 +72,15 @@ func (asaas *AsaasClient) PaymentBoleto(req PymentBoleto) (*Payment, *Error, err
 	}
 	return response, nil, nil
 }
+
+func (asaas *AsaasClient) GetPayment(id string) (*Payment, *Error, error) {
+	var response *Payment
+	err, errAPI := asaas.Request("GET", fmt.Sprintf("payments/%s", id), nil, &response)
+	if err != nil {
+		return nil, nil, err
+	}
+	if errAPI != nil {
+		return nil, errAPI, nil
+	}
+	return response, nil, nil
+}
